@@ -64,7 +64,16 @@ public class Client {
 				System.out.println(incommand);
 
 				System.out.println("Enter file name to download:\n");
-		
+				
+				String exists = input1.readUTF();
+				System.out.println(exists);
+			
+				if(incommand.equals("File not found!")) {
+					System.out.println("Error: File not found");	
+					socket.close();	
+				}
+				else {
+
 				String create_file_down1 = "";
 				create_file_down1 = input.readLine();
 
@@ -88,6 +97,8 @@ public class Client {
     				writer.close();
 				System.out.println("\nSuccessfully Saved!");
 				socket.close();
+				
+				}//end of else
 			}
 				
 			// Rename 

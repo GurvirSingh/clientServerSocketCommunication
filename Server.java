@@ -28,7 +28,7 @@ public class Server {
 			
 			if(command.equals("UPLOAD")){
 			// Send ok msg to client
-			System.out.println("Sent acknowledgement to Client");
+			System.out.println("Upload acknowledgement sent: OK");
 			ou.writeUTF("OK");
 			// end of msg to client
 
@@ -62,11 +62,25 @@ public class Server {
 			
 			if(command.equals("DOWNLOAD")) {
 
+				System.out.println("Download acknowledgement sent: OK");
 				ou.writeUTF("OK");
 
 				String file_name = "";
 				
 				file_name = in.readUTF();
+
+				// Check if file exists or not
+				File t = new File("/home/gurvir/A/Work");
+				boolean exists = t.exists();
+				System.out.println(exists);
+
+				if (!(exists)) {
+					ou.writeUTF("File not found!");
+				}
+				else {
+					ou.writeUTF("File found!");
+				}
+				
 
 				BufferedReader br_down = new BufferedReader(new FileReader(file_name)); 
 
