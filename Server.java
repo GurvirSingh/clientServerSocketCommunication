@@ -28,6 +28,7 @@ public class Server {
 			
 			if(command.equals("UPLOAD")){
 			// Send ok msg to client
+			System.out.println("Sent acknowledgement to Client");
 			ou.writeUTF("OK");
 			// end of msg to client
 
@@ -64,10 +65,11 @@ public class Server {
 				ou.writeUTF("OK");
 
 				String file_name = "";
+				
 				file_name = in.readUTF();
 
 				BufferedReader br_down = new BufferedReader(new FileReader(file_name)); 
-  
+
   				String st = ""; 
 
 

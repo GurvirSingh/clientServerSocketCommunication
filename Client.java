@@ -38,10 +38,10 @@ public class Client {
 				System.out.println("\nEnter File name to Upload: ");
 				String file_name = "";
 				file_name = input.readLine();
-				out.writeUTF(file_name);
 				
 				BufferedReader br = new BufferedReader(new FileReader(file_name)); 
-  
+  				out.writeUTF(file_name);
+
   				String st = ""; 
 
 
@@ -56,7 +56,7 @@ public class Client {
 			//	System.out.println("\nError: Command not found");
 			//}
 			
-			if(command.equals("DOWNLOAD")) {
+			else if(command.equals("DOWNLOAD")) {
 
 				out.writeUTF(command);
 
@@ -91,13 +91,17 @@ public class Client {
 			}
 				
 			// Rename 
-			if(command.equals("RENAME")) {
+			else if(command.equals("RENAME")) {
 
 			}
 
 			//Delete
-			if(command.equals("DELETE")) {
+			else if(command.equals("DELETE")) {
 
+			}
+
+			else {
+				System.out.println("Command not found!");
 			}
 			
 		}
