@@ -1,7 +1,6 @@
 import java.net.*;
 import java.io.*;
 
-
 public class Server {
 
 	private Socket socket = null;
@@ -10,7 +9,7 @@ public class Server {
 	private DataOutputStream ou = null;
 
 	public Server(int port) {
-
+		
 		try {
 			server = new ServerSocket(port);
 			System.out.println("Waiting for Connection");
@@ -23,10 +22,9 @@ public class Server {
 
 			String command = "";
 
-
 			command = in.readUTF();
 			//System.out.println(command);
-			
+				
 			if(command.equals("UPLOAD")){
 			// Send ok msg to client
 			System.out.println("Upload acknowledgement sent: OK");
@@ -36,7 +34,7 @@ public class Server {
 			System.out.println("\nClient is uploading a file...");
 			String file_name = "";
   			file_name = in.readUTF(); 
-			String create_file = "D:/Java/gshub/Uploads_by_client/"+file_name;
+			String create_file = "/home/gurvir/A/Work/CSE5306 Project1/Uploads_by_client/"+file_name;
 			try {
 				//String contents = in.readUTF();
                 		File file = new File(create_file);
@@ -48,19 +46,19 @@ public class Server {
 				String wrt = "";
 				while(!((wrt = in.readUTF()).equals("EOF"))) {
     				writer.write(wrt);
+				writer.write("\n");
 				//System.out.println(wrt);
 				}
 				
     				writer.close();
 				System.out.println("\nSuccessfully Saved!");
-				socket.close();
+				//socket.close();
 			
                 	}
                 	catch(Exception e) {
                 		System.out.println("Error Occured!");
                 	}
 			} // end of if condition 
-			
 			if(command.equals("DOWNLOAD")) {
 
 				System.out.println("Download acknowledgement sent: OK");
@@ -70,35 +68,19 @@ public class Server {
 				
 				file_name = in.readUTF();
 
-				// Check if file exists or not
-				File t = new File("/home/gurvir/A/Work");
-				boolean exists = t.exists();
-				System.out.println(exists);
-
-				if (!(exists)) {
-					ou.writeUTF("File not found!");
-				}
-				else {
-					ou.writeUTF("File found!");
-				}
-				
-
 				BufferedReader br_down = new BufferedReader(new FileReader(file_name)); 
 
   				String st = ""; 
 
-
+				ou.writeUTF("TRUE");
   				while ((st = br_down.readLine()) != null) {
-				System.out.println(st); 
+				//System.out.println(st); 
 				ou.writeUTF(st); 
     				}
 				ou.writeUTF("EOF"); 
-				ou.writeUTF("Over");
 			}
-				
 			// Rename 
-			if(command.equals("RENAME")) 
-			{
+			if(command.equals("RENAME")) {
 				//Send OK MSG TO CLIENT
 				System.out.println("Rename Acknowledgement sent :OK");
 				//ou.writeUTF("OK");
@@ -110,7 +92,7 @@ public class Server {
 				String file_name = "";
 				file_name = in.readUTF();
 				System.out.println("File Name = "+ file_name);
-				String create_file = "D:/Java/gshub/Uploads_by_client/"+file_name;
+				String create_file = "/home/gurvir/A/Work/CSE5306 Project1/Uploads_by_client/"+file_name;
 				File file = new File(create_file);
 
 				if(file.exists())
@@ -127,7 +109,7 @@ public class Server {
 					String nfile_name = "";
 					nfile_name = in.readUTF();
 					System.out.println("New File Name = " + nfile_name);
-					String ncreate_file = "D:/Java/gshub/Uploads_by_client/"+nfile_name;
+					String ncreate_file = "/home/gurvir/A/Work/CSE5306 Project1/Uploads_by_client/"+nfile_name;
 			     	File nfile = new File(ncreate_file);
 
 					if(file.renameTo(nfile))
@@ -136,10 +118,6 @@ public class Server {
 						ou.writeUTF(eval);
 						System.out.println("File Renamed");
 					}
-					
-					
-
-
 				}
 				else
 				{
@@ -147,8 +125,7 @@ public class Server {
 					ou.writeUTF(eval);
 					System.out.println("File Not Found");
 				}
-			}
-			
+			}		
 			//Delete
 			if(command.equals("DELETE")) {
 				//Send OK MSG TO CLIENT
@@ -161,7 +138,7 @@ public class Server {
 				String file_name = "";
 				file_name = in.readUTF();
 				System.out.println("File Name = "+ file_name);
-				String create_file = "D:/Java/gshub/Uploads_by_client/"+file_name;
+				String create_file = "/home/gurvir/A/Work/CSE5306 Project1/Uploads_by_client/"+file_name;
 				File file = new File(create_file);
 
 				if(file.exists())
@@ -180,19 +157,22 @@ public class Server {
 					ou.writeUTF(eval);
 
 				}
-				
-				
 				socket.close();
-
 			}
-			
 		}
 		catch(FileNotFoundException s) {
+		try{			
+			ou.writeUTF("FALSE");
 			System.out.println("Error: File not Found");		
 		}
-		catch(Exception e) {
-			System.out.println("Error in establishing connection");
+		catch (IOException i) {
+			System.out.println("Error");
 		}
+		}
+		catch(Exception e) {
+			System.out.println("Error in establishing connection" + e);
+		}
+	
 	}
 
 	public static void main(String args[]) {
