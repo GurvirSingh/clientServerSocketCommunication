@@ -1,6 +1,7 @@
 import java.net.*;
 import java.io.*;
 
+
 public class Server {
 
 	private Socket socket = null;
@@ -35,7 +36,7 @@ public class Server {
 			System.out.println("\nClient is uploading a file...");
 			String file_name = "";
   			file_name = in.readUTF(); 
-			String create_file = "/home/gurvir/A/Work/CSE5306 Project1/Uploads_by_client/"+file_name;
+			String create_file = "D:/Java/gshub/Uploads_by_client/"+file_name;
 			try {
 				//String contents = in.readUTF();
                 		File file = new File(create_file);
@@ -96,12 +97,92 @@ public class Server {
 			}
 				
 			// Rename 
-			if(command.equals("RENAME")) {
+			if(command.equals("RENAME")) 
+			{
+				//Send OK MSG TO CLIENT
+				System.out.println("Rename Acknowledgement sent :OK");
+				//ou.writeUTF("OK");
+				//End of MSG TO CLIENT
 
-			}		
 
+				String eval = "0";
+				System.out.println("\nClient is entering Filename to rename");
+				String file_name = "";
+				file_name = in.readUTF();
+				System.out.println("File Name = "+ file_name);
+				String create_file = "D:/Java/gshub/Uploads_by_client/"+file_name;
+				File file = new File(create_file);
+
+				if(file.exists())
+				{
+					eval = "1"; 
+					System.out.println("\nFile Exists");
+					
+					ou.writeUTF(eval);
+					//System.out.println("AFTER EVAL + 1");
+
+					System.out.println("Client Entering New File Name");
+					
+					
+					String nfile_name = "";
+					nfile_name = in.readUTF();
+					System.out.println("New File Name = " + nfile_name);
+					String ncreate_file = "D:/Java/gshub/Uploads_by_client/"+nfile_name;
+			     	File nfile = new File(ncreate_file);
+
+					if(file.renameTo(nfile))
+					{
+						eval = "2";
+						ou.writeUTF(eval);
+						System.out.println("File Renamed");
+					}
+					
+					
+
+
+				}
+				else
+				{
+					eval = "0";
+					ou.writeUTF(eval);
+					System.out.println("File Not Found");
+				}
+			}
+			
 			//Delete
 			if(command.equals("DELETE")) {
+				//Send OK MSG TO CLIENT
+				System.out.println("Delete Acknowledgement sent :OK");
+				ou.writeUTF("OK");
+				//End of MSG TO CLIENT
+
+                String eval = "0";
+				System.out.println("\nClient is entering Filename to delete");
+				String file_name = "";
+				file_name = in.readUTF();
+				System.out.println("File Name = "+ file_name);
+				String create_file = "D:/Java/gshub/Uploads_by_client/"+file_name;
+				File file = new File(create_file);
+
+				if(file.exists())
+				{
+					System.out.println("File Found.\nDeleting File...");
+					if(file.delete()){
+						System.out.println("File Deleted");
+						eval = "1";
+						ou.writeUTF(eval);
+					}
+				}
+				else
+				{
+					eval = "0";
+					System.out.println("File Not Found");
+					ou.writeUTF(eval);
+
+				}
+				
+				
+				socket.close();
 
 			}
 			

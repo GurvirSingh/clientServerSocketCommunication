@@ -28,7 +28,8 @@ public class Client {
 			System.out.println("\n\nEnter Command: ");
 			command = input.readLine();
 
-			if(command.equals("UPLOAD")) {
+			if(command.equals("UPLOAD")) 
+			{
 
 				out.writeUTF(command);				
 
@@ -78,7 +79,7 @@ public class Client {
 				create_file_down1 = input.readLine();
 
 				
-				String create_file_down2 ="/home/gurvir/A/Work/CSE5306 Project1/Downloads_by_client/"+create_file_down1;
+				String create_file_down2 ="D:/Java/gshub/Downloads_by_client/"+create_file_down1;
 
 				out.writeUTF(create_file_down1);
 				
@@ -102,24 +103,89 @@ public class Client {
 			}
 				
 			// Rename 
-			else if(command.equals("RENAME")) {
+			else if(command.equals("RENAME")) 
+			{
+				out.writeUTF(command);
+
+				//String incommand = input1.readLine();
+				//System.out.println(incommand);
+
+				System.out.println("Enter File to Rename");
+				String file_name = "";
+				file_name = input.readLine();
+				out.writeUTF(file_name);
+
+				//BufferedReader br = new BufferedReader(new FileReader(file_name)); 
+				
+				  String eval = "";
+				  eval = input1.readUTF();
+				  //System.out.println(eval);
+				  
+
+				  if(eval.equals("1"))
+				  {
+					System.out.println("File Exists");
+					System.out.println("Enter New File Name");
+					String nfile_name = "";
+					nfile_name = input.readLine();
+					out.writeUTF(nfile_name);
+
+					eval = input1.readUTF();
+					if(eval.equals("2"))
+					{
+						System.out.println("File Successfully Renamed");
+					}
+
+				  }
+				  else if(eval.equals("0"))
+				  {
+					System.out.println("File Not Found");
+				  }
+
+
+
 
 			}
 
 			//Delete
-			else if(command.equals("DELETE")) {
+			else if(command.equals("DELETE")) 
+			{
+				out.writeUTF(command);
 
-			}
+				String incommand = input1.readUTF();
+				System.out.println(incommand);
+				
+				System.out.println("\nEnter File Name to Delete ");
+				String file_name = "";
+				file_name = input.readLine();
+				out.writeUTF(file_name);
 
-			else {
-				System.out.println("Command not found!");
+				//BufferedReader br = new BufferedReader(new FileReader(file_name)); 
+				  
+				
+				  String eval = "0";
+				  eval = input1.readUTF();
+
+				  if(eval.equals("1")){
+					  System.out.println("File Found");
+					  System.out.println("File Deleted");
+				  }
+				  else 
+				  {
+					  System.out.println("File not found");
+					
+				  }
+				  
+
 			}
 			
 		}
-		catch(FileNotFoundException e) {
+		catch(FileNotFoundException e) 
+		{			
 			System.out.println("Error: File not found");
 		}
-		catch(Exception u) {
+		catch(Exception u) 
+		{
 			System.out.println("Error while establishing connection");
 		}
 		
