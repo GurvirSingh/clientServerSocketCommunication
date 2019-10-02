@@ -1,0 +1,7 @@
+Hello 
+this 
+is 
+a multi line 
+FILE with UPPER CASE, lowerCase,
+special characters #$%^ 1245
+and numbers, 998899.
