@@ -58,7 +58,6 @@ class ClientHandler extends Thread
         String toreturn; 
 
 			try {
-				// new code
 				String command = "";
 
 				command = dis.readUTF();
@@ -141,7 +140,6 @@ class ClientHandler extends Thread
 						System.out.println("\nFile Exists");
 						
 						dos.writeUTF(eval);
-						//System.out.println("AFTER EVAL + 1");
 	
 						System.out.println("Client Entering New File Name");
 						
@@ -213,18 +211,6 @@ class ClientHandler extends Thread
 			catch(IOException e) {
 				System.out.println("Error in establishing connection" + e);
 			}
-		 
-				// new code
-	// try
-    //     { 
-    //         // closing resources 
-    //         this.dis.close(); 
-    //         this.dos.close(); 
-              
-    //     } catch(IOException e){ 
-    //         e.printStackTrace(); 
-    //     } 
-    //     } 
           
 	}    
     }  
