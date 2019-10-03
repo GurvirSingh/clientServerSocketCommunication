@@ -1,12 +1,13 @@
 import java.net.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class Client {
 
 // Declare all the input and output buffers as null
 
 	private Socket socket = null;
-	private DataInputStream input, input1, in = null;
+	private DataInputStream  in = null;
 	private DataOutputStream out = null;
 
 // Parameterized Constructor for Client class
@@ -19,31 +20,31 @@ public class Client {
 			System.out.println("Connection established");
 			
 			// Initialise the instance variables for communication
-			input = new DataInputStream(System.in);
 			out = new DataOutputStream(socket.getOutputStream());
 			in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 
+			Scanner sc = new Scanner(System.in);
+
 			// get command from user
 			System.out.println("\nEnter UPLOAD to upload a file to the server \nDOWNLOAD to download a file from the server\nRENAME to rename a file in the server\nDELETE to delete a file from the server. [All commands should be in Upper Case]");
-			input1 = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+			
 			String command = " ";
 			System.out.println("\n\nEnter Command: ");
-			command = input.readLine();
+			command = sc.nextLine();
 
-			
 			// check command for validations 
 			if(command.equals("UPLOAD")) {
 				//send command to server 
 				out.writeUTF(command);				
 
 				//read acknowledgement from server
-				String incommand = input1.readUTF();
+				String incommand = in.readUTF();
 				System.out.println(incommand);
 				
 				// get filename from user
 				System.out.println("\nEnter File name to Upload: ");
 				String file_name = "";
-				file_name = input.readLine();
+				file_name = sc.nextLine();
 				
 				// initialise buffer for communication
 				BufferedReader br = new BufferedReader(new FileReader(file_name)); 
@@ -64,20 +65,20 @@ public class Client {
 				//send command to server 
 				out.writeUTF(command);
 
-				String incommand = input1.readUTF();
+				String incommand = in.readUTF();
 				System.out.println(incommand);
 
 				System.out.println("Enter file name to download:\n");
 
 				String create_file_down1 = "";
-				create_file_down1 = input.readLine();
+				create_file_down1 = sc.nextLine();
 
 				
-				String create_file_down2 ="/home/gurvir/A/Work/CSE5306 Project1/assign2/Downloads_by_client/"+create_file_down1;
+				String create_file_down2 ="/home/gurvir/A/Work/CSE5306 Project1/Downloads_by_client/"+create_file_down1;
 
 				out.writeUTF(create_file_down1);
 
-				String exist = input1.readUTF();
+				String exist = in.readUTF();
 				// below line commented for debugging purposes
 				//System.out.println(exist);
 				if(exist.equals("TRUE")){
@@ -114,12 +115,12 @@ public class Client {
 
 				System.out.println("Enter File to Rename");
 				String file_name = "";
-				file_name = input.readLine();
+				file_name = sc.nextLine();
 				out.writeUTF(file_name);
 
 				
 				  String eval = "";
-				  eval = input1.readUTF();
+				  eval = in.readUTF();
 				// below line commented for debugging purposes
 				  //System.out.println(eval);
 				  
@@ -129,10 +130,10 @@ public class Client {
 					System.out.println("File Exists");
 					System.out.println("Enter New File Name");
 					String nfile_name = "";
-					nfile_name = input.readLine();
+					nfile_name = sc.nextLine();
 					out.writeUTF(nfile_name);
 
-					eval = input1.readUTF();
+					eval = in.readUTF();
 					if(eval.equals("2"))
 					{
 						System.out.println("File Successfully Renamed");
@@ -149,16 +150,16 @@ public class Client {
 				//send command to server
 				out.writeUTF(command);
 
-				String incommand = input1.readUTF();
+				String incommand = in.readUTF();
 				System.out.println(incommand);
 				
 				System.out.println("\nEnter File Name to Delete ");
 				String file_name = "";
-				file_name = input.readLine();
+				file_name = sc.nextLine();
 				out.writeUTF(file_name);
 	  				
 				  String eval = "0";
-				  eval = input1.readUTF();
+				  eval = in.readUTF();
 
 				  if(eval.equals("1")){
 					  System.out.println("File Found");
@@ -174,7 +175,7 @@ public class Client {
 				System.out.println("Command not found!");
 			}
 
-}
+		}
 		catch(FileNotFoundException e) {
 			System.out.println("Error: File not found");
 		}
