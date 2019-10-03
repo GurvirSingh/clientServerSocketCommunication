@@ -7,7 +7,7 @@ public class Client {
 // Declare all the input and output buffers as null
 
 	private Socket socket = null;
-	private DataInputStream input, input1, in = null;
+	private DataInputStream  in = null;
 	private DataOutputStream out = null;
 
 // Parameterized Constructor for Client class
@@ -22,7 +22,6 @@ public class Client {
 			// Initialise the instance variables for communication
 			out = new DataOutputStream(socket.getOutputStream());
 			in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-			//input1 = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 
 			Scanner sc = new Scanner(System.in);
 
