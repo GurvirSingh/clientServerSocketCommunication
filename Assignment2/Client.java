@@ -74,7 +74,7 @@ public class Client {
 				create_file_down1 = sc.nextLine();
 
 				
-				String create_file_down2 ="/home/gurvir/A/Work/CSE5306 Project1/Downloads_by_client/"+create_file_down1;
+				String create_file_down2 ="/home/gurvir/A/Work/CSE5306 Project1/Assignment2/Downloads_by_client/"+create_file_down1;
 
 				out.writeUTF(create_file_down1);
 

@@ -34,7 +34,7 @@ public class Server {
 			System.out.println("\nClient is uploading a file...");
 			String file_name = "";
   			file_name = in.readUTF(); 
-			String create_file = "/home/gurvir/A/Work/CSE5306 Project1/Uploads_to_server/"+file_name;
+			String create_file = "/home/gurvir/A/Work/CSE5306 Project1/Assignment1/Uploads_to_server/"+file_name;
 			try {
 				//String contents = in.readUTF();
                 		File file = new File(create_file);
@@ -92,7 +92,7 @@ public class Server {
 				String file_name = "";
 				file_name = in.readUTF();
 				System.out.println("File Name = "+ file_name);
-				String create_file = "/home/gurvir/A/Work/CSE5306 Project1/Uploads_to_server/"+file_name;
+				String create_file = "/home/gurvir/A/Work/CSE5306 Project1/Assignment1/Uploads_to_server/"+file_name;
 				File file = new File(create_file);
 
 				if(file.exists())
@@ -109,7 +109,7 @@ public class Server {
 					String nfile_name = "";
 					nfile_name = in.readUTF();
 					System.out.println("New File Name = " + nfile_name);
-					String ncreate_file = "/home/gurvir/A/Work/CSE5306 Project1/Uploads_to_server/"+nfile_name;
+					String ncreate_file = "/home/gurvir/A/Work/CSE5306 Project1/Assignment1/Uploads_to_server/"+nfile_name;
 			     	File nfile = new File(ncreate_file);
 
 					if(file.renameTo(nfile))
@@ -138,7 +138,7 @@ public class Server {
 				String file_name = "";
 				file_name = in.readUTF();
 				System.out.println("File Name = "+ file_name);
-				String create_file = "/home/gurvir/A/Work/CSE5306 Project1/Uploads_to_server/"+file_name;
+				String create_file = "/home/gurvir/A/Work/CSE5306 Project1/Assignment1/Uploads_to_server/"+file_name;
 				File file = new File(create_file);
 
 				if(file.exists())
