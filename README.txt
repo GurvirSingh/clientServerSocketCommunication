@@ -1,4 +1,4 @@
-Assignment 1
+File_Server
 
 Problem Statement:
 Implement a basic single-threaded file server that supports the four operations listed above. You
@@ -23,7 +23,7 @@ Instructions To Run the Program:
 The program will stop execution after completing a single operation or if there is any wrong input.
 
 
-Assignment 2
+File_Server_MultiThread
 
 Problem Statement:
 Based on the single-threaded server, implement a multi-threaded file server. The client side
@@ -48,7 +48,7 @@ Instructions To Run the Program:
 The program will stop execution after completing a single operation or if there is any wrong input.
 
 
-Assignment 3
+RPC
 
 Problem Statement:
 Use the following design of the synchronous RPCs to implement a computation server. The server
@@ -76,7 +76,7 @@ Instructions To Run the Program:
 The program will stop execution after completing a single operation or if there is any wrong input.
 
 
-Assignment 4
+CommunicationTypes
 
 Problem Statement:
 Re-implement the computation server using asynchronous and deferred synchronous
