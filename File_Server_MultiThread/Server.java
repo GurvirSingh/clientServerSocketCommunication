@@ -85,7 +85,7 @@ class ClientHandler extends Thread
 					while(!((wrt = dis.readUTF()).equals("EOF"))) {
 						writer.write(wrt);
 					writer.write("\n");
-					System.out.println(wrt);
+					//System.out.println(wrt);
 					}
 					
 						writer.close();

@@ -1,4 +1,5 @@
 Assignment 1
+
 Problem Statement:
 Implement a basic single-threaded file server that supports the four operations listed above. You
 will use the message-oriented communication protocol. You can assume that the client and the
@@ -23,6 +24,7 @@ The program will stop execution after completing a single operation or if there 
 
 
 Assignment 2
+
 Problem Statement:
 Based on the single-threaded server, implement a multi-threaded file server. The client side
 software does not need any changes but the server should be able to support multiple concurrent
@@ -47,6 +49,7 @@ The program will stop execution after completing a single operation or if there 
 
 
 Assignment 3
+
 Problem Statement:
 Use the following design of the synchronous RPCs to implement a computation server. The server
 supports four RPCs: calculate_pi(), add(i, j), sort(arrayA),
@@ -74,6 +77,7 @@ The program will stop execution after completing a single operation or if there 
 
 
 Assignment 4
+
 Problem Statement:
 Re-implement the computation server using asynchronous and deferred synchronous
 RPCs. For asynchronous RPC, the server immediately acknowledges a RPC call before it

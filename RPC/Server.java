@@ -25,7 +25,7 @@ public class Server
 			
 			in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             ou = new DataOutputStream(socket.getOutputStream());
-    
+            
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 
@@ -36,13 +36,6 @@ public class Server
             if(command.equals("1"))
             {
                 System.out.println("Request Received");
-                ou.writeUTF("Pi Value Acknowledgement: OK");
-
-                try {
-                    Thread.sleep(4 * 1000);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                }
 
                 double result = 0;
                 result = CalculatePi();
@@ -57,29 +50,20 @@ public class Server
             else if(command.equals("2"))
             {
                 System.out.println("Request Received");
-                ou.writeUTF("ADD Acknowledgement: OK");
 
-                try {
-                    Thread.sleep(5 * 1000);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                }
-
+                
                 String tempst = "";
 
-               
                byte buffer[] = new byte[1024];
                baos.write(buffer, 0 , in.read(buffer));
 
                byte Res[] = baos.toByteArray();
-               System.out.println("THIS IS BYTE ARRAY :- "+ Arrays.toString(Res));
 
                String SRes = new String(Res);
-               System.out.println("String Converted Array :- "+ SRes);
 
 
 
-                System.out.println("RECEIVED PACKAGE -"+tempst);
+                System.out.println("RECEIVED PACKAGE");
 
                 
                 
@@ -101,7 +85,7 @@ public class Server
             else if(command.equals("3"))
             {
                 System.out.println("Request Received");
-                ou.writeUTF("Array Sort Acknowledgement: OK");
+
                 
                 String size = in.readUTF();
                 int N = Integer.parseInt(size);
@@ -111,16 +95,15 @@ public class Server
                baos.write(buffer, 0 , in.read(buffer));
 
                byte Res[] = baos.toByteArray();
-               System.out.println("THIS IS BYTE ARRAY :- "+ Arrays.toString(Res));
+
 
                String SRes = new String(Res);
-               System.out.println("String Converted Array :- "+ SRes);
+
 
                 System.out.println("Received Package");
 
                 String[] str = SRes.split(",",N);
                 double[] arr = new double[N];
-                //System.out.println("#$#");
 
                   for(int i =0; i <N; i++)
                   {
@@ -130,14 +113,11 @@ public class Server
                
                 Sort(arr,N);
 
-                try {
-                    Thread.sleep(5 * 1000);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                }
+              
                 //Print Sorted Array TEST
                 for(int i =0; i<arr.length;i++)
                 {
+                    //System.out.println(arr[i]);
                     ou.writeUTF(arr[i]+"");
                 }
 
@@ -145,7 +125,6 @@ public class Server
             else if(command.equals("4"))
             {
                 System.out.println("Request Received");
-                ou.writeUTF("Matrix Multiplication Acknowledgement: OK");
 
                 
                 int M = in.readInt();
@@ -158,14 +137,15 @@ public class Server
                 baos.write(buffer, 0 , in.read(buffer));
  
                 byte Res[] = baos.toByteArray();
-                System.out.println("THIS IS BYTE ARRAY :- "+ Arrays.toString(Res));
+
  
                 String SRes = new String(Res);
-                System.out.println("String Converted Array :- "+ SRes);
+
 
                 String[] str = SRes.split("/",2);
                 String[] str1 = str[0].split(",",1000);
                 String[] str2 = str[1].split(",",1000);
+
                 int sum1 = M*N;
                 int sum2 = P*Q;
                 int temp=0;
@@ -180,8 +160,7 @@ public class Server
                     for(int k=0; k<N; k++)
                     {
                         temp=Integer.parseInt(str1[d++]);
-                        l[j][k] = temp; 
-                        //d = d + 1;                    
+                        l[j][k] = temp;                   
                     }
                    }
                   
@@ -192,8 +171,7 @@ public class Server
                     for(int k=0; k<Q; k++)
                     {
                         temp=Integer.parseInt(str2[d++]);
-                        m[j][k] = temp;  
-                   
+                        m[j][k] = temp;                   
                     }
                    }
                   
@@ -223,18 +201,12 @@ public class Server
                   int soln[][] = new int[M][Q];
                  soln = MatrixMul(l,m,M,Q,N);
 
-                 try {
-                    Thread.sleep(5 * 1000);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                }
-
                  //Answer 
                  for (int i = 0; i < M; i++)
                   {
                       for (int j = 0; j < Q; j++)
                       {
-                          System.out.print(soln[i][j]);
+                          //System.out.print(soln[i][j]);
                           ou.writeUTF(soln[i][j]+"");
                           
                       }
